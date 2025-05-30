@@ -2,19 +2,20 @@
 % Please edit documentation in R/predict.DINA.R
 \name{predict.DINA}
 \alias{predict.DINA}
-\title{DINA}
+\title{predict.DINA}
 \usage{
-\method{predict}{DINA}(object, ..., interval = "none", sd.method = "bootstrap")
+\method{predict}{DINA}(object, newdata, ...)
 }
 \arguments{
-\item{sd.method}{"bootstrap", "approximation".}
+\item{object}{object of class "DINA".}
 
-\item{newdata}{the data frame in which to look for variables with which to predict. If omitted, the fitted values are used. Default is NULL.}
+\item{newdata}{data frame or matrix of covariates with which to predict.}
 
-\item{interval:}{"none", "confidence", "prediction?". Type of interval calculation. If omitted, point estimates are provided. Default is NULL.}
-
-\item{level}{confidence level. Default is 0.95.}
+\item{...}{further arguments passed to or from other methods.}
+}
+\value{
+a vector of predictions.
 }
 \description{
-This function adapts the predict.lm for DINA.
+This function computes the predicted heterogeneous treatment effect based on a DINA object.
 }

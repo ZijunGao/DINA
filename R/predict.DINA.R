@@ -1,16 +1,23 @@
-#' DINA
+#' predict.DINA
 #'
-#' This function adapts the predict.lm for DINA.
+#' This function computes the predicted heterogeneous treatment effect based on a DINA object.
 #' @method predict DINA
 #' @importFrom stats predict
 #'
-#' @param object
-#' @param newdata the data frame in which to look for variables with which to predict. If omitted, the fitted values are used. Default is NULL.
-#' @param interval: "none", "confidence", "prediction?". Type of interval calculation. If omitted, point estimates are provided. Default is NULL.
-#' @param level confidence level. Default is 0.95.
-#' @param sd.method "bootstrap", "approximation".
+#' @param object object of class "DINA".
+#' @param newdata data frame or matrix of covariates with which to predict.
+#' @param ... further arguments passed to or from other methods.
+#'
+#' @return a vector of predictions.
 #'
 #' @export
-predict.DINA = function(object, ..., interval = "none", sd.method = "bootstrap"){
+predict.DINA = function(object, newdata, ...){
+  # preprocess
+  if(class(object) != "DINA"){stop("Please input an object of class DINA.")}
+  if(!class(newdata)[1] %in% c("array", "matrix", "data.frame")){stop("Please input a matrix or data frame as the newdata.")}
 
+  # predict
+  result = c(cbind(1, newdata) %*%  object$estimator)
+
+  return(result)
 }
